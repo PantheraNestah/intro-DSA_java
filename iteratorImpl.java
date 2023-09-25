@@ -18,42 +18,51 @@ public class iteratorImpl<T> implements Iterator<T> {
         currentNode = currentNode.next;
         return (nodeData);
     }
-
-    public dataClass<T> getHead()
+    /**
+     *  @Override
+     *  public void remove()
+     *  {}
+     */
+    public T getHead()
     {
-        return (head);
+        return (head.data);
     }
-    public dataClass<T> getTail()
+    public T getTail()
     {
-        return (tail);
+        return (tail.data);
     }
     public void addNodeEnd(T nodeData)
     {
         tail.next = new dataClass<>(nodeData);
         tail = tail.next;
     }
+    public void addNodeStart(T nodeData)
+    {
+        dataClass<T> tempNode = new dataClass<>(nodeData);
+        tempNode.next = head;
+        head = currentNode = tempNode;
+    }
 
     public static void main(String[] args) {
         iteratorImpl<String> myAdt = new iteratorImpl<>(new dataClass<String>("Intro DSA"));
-        myAdt.addNodeEnd("Nestah");
-        myAdt.addNodeEnd("@paNthera..!");
-
+        myAdt.addNodeEnd("Intro Systems Programming");
+        myAdt.addNodeEnd("Internet Application Programming");
+        myAdt.addNodeStart("Object Oriented Programming");
         /**
-         * System.out.println(myAdt.getTail().data);
-         *
+         * System.out.println(myAdt.getTail());
+         * System.out.println(myAdt.getHead());
          */
         while (myAdt.hasNext())
         {
             System.out.println(myAdt.next());
         }
-        System.out.println(myAdt.next());
+        System.out.println(myAdt.getTail());
     }
 }
 
 class dataClass<T>{
     T data;
     dataClass<T> next;
-
     public dataClass(T nodeData)
     {
         data = nodeData;
